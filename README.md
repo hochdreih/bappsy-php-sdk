@@ -31,8 +31,6 @@ use Bappsy\Bappsy;
 
 $bappsy = new Bappsy("<yourAPIKey>");
 
-
-
 $get = $bappsy->get($endpoint, $q, $prePart, $postPart);
 $getDetail = $bappsy->getDetail($endpoint, $id, $q, $prePart, $postPart);
 $copy = $bappsy->copy( $endpoint, $id);
@@ -45,7 +43,7 @@ $create = $bappsy->create($endpoint, $data, $prePart, $postPart);
 ### Use Endpoints directly
 The SDK Provides you with
 ``
-get() getDetail() create() update() ->delete()``
+get() getDetail() create() update() delete()``
 methods for general data manipulation
 Find all Endpoints in the [API Documentation](https://api-v1.bappsy.com/api-docs/v3/#/)
 
