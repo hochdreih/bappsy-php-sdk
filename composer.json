@@ -1,0 +1,20 @@
+{
+    "name": "hochdreih/bappsy-sdk-php",
+    "description": "Bappsy - Business Application System",
+    "version": "2021.2.0",
+    "type": "library",
+    "authors": [
+        {
+            "name": "hochdreih",
+            "email": "info@hochdreih.com"
+        }
+    ],
+    "require": {
+        "pear/http_request2": "^2.4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Bappsy": "src/"
+        }
+    }
+}
