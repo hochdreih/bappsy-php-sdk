@@ -1,7 +1,7 @@
 {
     "name": "hochdreih/bappsy-sdk-php",
     "description": "Bappsy - Business Application System",
-    "version": "2021.2.0",
+    "version": "2021.2.1",
     "type": "library",
     "authors": [
         {
