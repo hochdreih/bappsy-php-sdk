@@ -44,7 +44,7 @@ class Bappsy implements IBappsy
      * @param $postPart
      * @return mixed
      */
-    public function get($endpoint, $q, $prePart, $postPart)
+    public function get($endpoint, $q = null, $prePart= null, $postPart= null)
     {
         $result = $this->doRequest($this->buildRequest('GET', $endpoint, null, $prePart, $postPart, $q));
         return json_decode($result);
@@ -120,30 +120,13 @@ class Bappsy implements IBappsy
 
     }
 
-    private function buildRequest($method, $endpoint, $id = null, $prePart = null, $postPart = null, $q = null, $data =null  ){
-        $url = $this->_apiUrl . '/api/' . $endpoint . ($prePart ? '/'. $prePart : '') . ($id ? '/'. $id : '') . ($postPart ? '/' . $postPart : '') . '?';
-
-        if ($q) {
-            $queryParams = $q;
-        }else{
-            $queryParams = array();
-        }
-
-
-        for ($i = 0, $length = count($queryParams); $i < $length; ++$i) {
-            $url = $url . $queryParams[$i]['param'] .'='. $queryParams[$i]['value'] . '&';
-        }
-
+    private function buildRequest($method, $endpoint, $id = null , $prePart = null, $postPart = null, $q = null, $data =null  ){
+        $url = $this->_apiUrl . '/api/' . $endpoint . ($prePart !== null ? '/'. $prePart : '') . ($id  !== null ? '/'. $id : '') . ($postPart  !== null ? '/' . $postPart : '') . '?';
         $url = $url . 'access_token=' . $this->apiKey;
-
-        echo $url;
-        var_dump($data);
-
         $result = new stdClass();
         $result->url = $url;
         $result->method = $method;
         $result->data = $data;
-
         return $result;
     }
 
@@ -166,15 +149,18 @@ class Bappsy implements IBappsy
         }
 
             $dataToSend = json_encode($req->data);
-            echo $dataToSend;
+            var_dump($req->url);
+            var_dump($dataToSend);
 
             $request->setHeader('Content-Type', 'application/json');
 
+            if ($req->method !== 'GET') {
+                $request->setBody($dataToSend);
+            }
 
-            $request->setBody($dataToSend);
             $response = $request->send();
             if ($response->getStatus() == 200) {
-                echo $response->getBody();
+                var_dump($response->getBody());
                 return $response->getBody();
             }
             else {
